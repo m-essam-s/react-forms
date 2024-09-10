@@ -7,20 +7,18 @@ const Form = () => {
             lastName: "",
             email: "",
             comments: "",
+            isFriendly: true
         }
     );
 
     const handleFormChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value, type, checked } = event.target;
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            [name]: type === "checkbox" ? checked : value,
+        }));
+    };
 
-        setFormData(prevFormData => {
-            return {
-                ...prevFormData,
-                [event.target.name]: event.target.value
-            }
-        });
-
-
-    }
     console.log(formData);
     return (
         <form>
@@ -54,6 +52,18 @@ const Form = () => {
                 name="comments"
                 value={formData.comments}
             />
+
+            <input
+                type="checkbox"
+                id="isFriendly"
+                name="isFriendly"
+                onChange={handleFormChange}
+                checked={formData.isFriendly}
+            />
+            <label htmlFor="isFriendly">Are you friendly?</label>
+            <br />
+
+
         </form>
     )
 }
