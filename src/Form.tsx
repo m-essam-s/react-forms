@@ -9,10 +9,11 @@ const Form = () => {
             comments: "",
             isFriendly: true,
             employment: "",
+            favColor: "",
         }
     );
 
-    const handleFormChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const handleFormChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value, type } = event.target;
         const checked = (event.target as HTMLInputElement).checked;
         setFormData((prevFormData) => ({
@@ -67,8 +68,8 @@ const Form = () => {
 
             <fieldset>
                 <legend>Current employment status</legend>
-                
-                <input 
+
+                <input
                     type="radio"
                     id="unemployed"
                     name="employment"
@@ -78,8 +79,8 @@ const Form = () => {
                 />
                 <label htmlFor="unemployed">Unemployed</label>
                 <br />
-                
-                <input 
+
+                <input
                     type="radio"
                     id="part-time"
                     name="employment"
@@ -89,8 +90,8 @@ const Form = () => {
                 />
                 <label htmlFor="part-time">Part-time</label>
                 <br />
-                
-                <input 
+
+                <input
                     type="radio"
                     id="full-time"
                     name="employment"
@@ -100,8 +101,25 @@ const Form = () => {
                 />
                 <label htmlFor="full-time">Full-time</label>
                 <br />
-                
+
             </fieldset>
+
+            <select
+                id="favColor"
+                value={formData.favColor}
+                onChange={handleFormChange}
+                name="favColor"
+            >
+                <option value="">-- Please choose a color --</option>
+                <option value="red">Red</option>
+                <option value="orange">Orange</option>
+                <option value="yellow">Yellow</option>
+                <option value="green">Green</option>
+                <option value="blue">Blue</option>
+                <option value="indigo">Indigo</option>
+                <option value="violet">Violet</option>
+            </select>
+            <br />
 
         </form>
     )
