@@ -22,9 +22,14 @@ const Form = () => {
         }));
     };
 
-    console.log(formData);
+    function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault()
+        
+        console.log(formData)
+    };
+    
     return (
-        <form>
+        <form onSubmit={handleSubmit}>
             <input
                 type="text"
                 placeholder="First Name"
@@ -120,6 +125,8 @@ const Form = () => {
                 <option value="violet">Violet</option>
             </select>
             <br />
+            <br />
+            <button>Submit</button>
 
         </form>
     )
