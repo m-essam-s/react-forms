@@ -1,4 +1,7 @@
-import { useState } from "react"
+import {
+    useId,
+    useState
+} from "react"
 
 const Form = () => {
     const [formData, setFormData] = useState(
@@ -13,6 +16,8 @@ const Form = () => {
         }
     );
 
+    const id = useId();
+
     const handleFormChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value, type } = event.target;
         const checked = (event.target as HTMLInputElement).checked;
@@ -24,98 +29,98 @@ const Form = () => {
 
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
-        
         console.log(formData)
     };
-    
+
     return (
         <form onSubmit={handleSubmit}>
+            <label htmlFor={id + "-firstName"}>First Name</label>
             <input
                 type="text"
-                placeholder="First Name"
                 onChange={handleFormChange}
                 name="firstName"
                 value={formData.firstName}
+                id={id + "-firstName"}
             />
-
+            <label htmlFor={id + "-lastName"}>Last Name</label>
             <input
                 type="text"
-                placeholder="Last Name"
                 onChange={handleFormChange}
                 name="lastName"
                 value={formData.lastName}
+                id={id + "-lastName"}
             />
-
+            <label htmlFor={id + "-email"}>Email</label>
             <input
                 type="email"
-                placeholder="Email"
                 onChange={handleFormChange}
                 name="email"
                 value={formData.email}
+                id={id + "-email"}
             />
-
+            <label htmlFor={id + "-comments"}>Comments</label>
             <textarea
-                placeholder="Comments"
+                value={formData.comments}
                 onChange={handleFormChange}
                 name="comments"
-                value={formData.comments}
+                id={id + "-comments"}
             />
-
             <input
                 type="checkbox"
-                id="isFriendly"
-                name="isFriendly"
-                onChange={handleFormChange}
+                id={id + "-isFriendly"}
                 checked={formData.isFriendly}
+                onChange={handleFormChange}
+                name="isFriendly"
             />
-            <label htmlFor="isFriendly">Are you friendly?</label>
+            <label htmlFor={id + "-isFriendly"}>Are you friendly?</label>
+            <br />
             <br />
 
             <fieldset>
                 <legend>Current employment status</legend>
-
                 <input
                     type="radio"
-                    id="unemployed"
+                    id={id + "-unemployed"}
                     name="employment"
                     value="unemployed"
                     checked={formData.employment === "unemployed"}
                     onChange={handleFormChange}
                 />
-                <label htmlFor="unemployed">Unemployed</label>
+                <label htmlFor={id + "-unemployed"}>Unemployed</label>
                 <br />
 
                 <input
                     type="radio"
-                    id="part-time"
+                    id={id + "-part-time"}
                     name="employment"
                     value="part-time"
                     checked={formData.employment === "part-time"}
                     onChange={handleFormChange}
                 />
-                <label htmlFor="part-time">Part-time</label>
+                <label htmlFor={id + "-part-time"}>Part-time</label>
                 <br />
 
                 <input
                     type="radio"
-                    id="full-time"
+                    id={id + "-full-time"}
                     name="employment"
                     value="full-time"
                     checked={formData.employment === "full-time"}
                     onChange={handleFormChange}
                 />
-                <label htmlFor="full-time">Full-time</label>
+                <label htmlFor={id + "-full-time"}>Full-time</label>
                 <br />
-
             </fieldset>
+            <br />
 
+            <label htmlFor={id + "-favColor"}>What is your favorite color?</label>
+            <br />
             <select
-                id="favColor"
+                id={id + "-favColor"}
                 value={formData.favColor}
                 onChange={handleFormChange}
                 name="favColor"
             >
-                <option value="">-- Please choose a color --</option>
                 <option value="red">Red</option>
                 <option value="orange">Orange</option>
                 <option value="yellow">Yellow</option>
@@ -127,7 +132,6 @@ const Form = () => {
             <br />
             <br />
             <button>Submit</button>
-
         </form>
     )
 }
